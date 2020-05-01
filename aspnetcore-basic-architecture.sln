@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.1082
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aspnetcore-basic-architecture", "aspnetcore-basic-architecture\aspnetcore-basic-architecture.csproj", "{504CD651-5B3C-42B0-8C36-796215325D48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspnetCoreBasicArchitecture", "aspnetcore-basic-architecture\AspnetCoreBasicArchitecture.csproj", "{504CD651-5B3C-42B0-8C36-796215325D48}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
