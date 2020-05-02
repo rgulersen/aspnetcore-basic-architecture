@@ -1,22 +1,25 @@
 ﻿using Autofac;
 using System.Linq;
+using System.Reflection;
 using Module = Autofac.Module;
 
-namespace AspnetCoreBasicArchitecture.Infrastructure
+namespace AspnetCoreBasicArchitecture.Infrastructure.AutoFac
 {
-    public class RepositoryModule : Module
+    public class ServiceModule : Module
     {
         private ModuleConfiguration _moduleConfiguration;
-        public RepositoryModule(ModuleConfiguration moduleConfiguration)
+        public ServiceModule(ModuleConfiguration moduleConfiguration)
         {
             _moduleConfiguration = moduleConfiguration;
         }
+
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterAssemblyTypes(_moduleConfiguration.ModuleAssembly)
-                   .Where(t => t.Name.EndsWith(_moduleConfiguration.Suffix))
-                   .AsImplementedInterfaces()
-                   .InstancePerLifetimeScope();
+                  .Where(t => t.Name.EndsWith(_moduleConfiguration.Suffix))
+                  .AsImplementedInterfaces()
+                  .InstancePerLifetimeScope();
         }
+
     }
 }

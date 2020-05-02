@@ -15,8 +15,9 @@ using Microsoft.Extensions.Options;
 using AspnetCoreBasicArchitecture.Services;
 using Autofac.Extensions.DependencyInjection;
 using Autofac;
-using AspnetCoreBasicArchitecture.Infrastructure;
+using AspnetCoreBasicArchitecture.Infrastructure.AutoFac;
 using System.Reflection;
+using AutoMapper;
 
 namespace AspnetCoreBasicArchitecture
 {
@@ -32,6 +33,7 @@ namespace AspnetCoreBasicArchitecture
         //// This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(typeof(Startup));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             var connectionSetring = Configuration.GetConnectionString("ProductConnection");
             services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ProductConnection")));

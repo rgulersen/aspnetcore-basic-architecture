@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-namespace AspnetCoreBasicArchitecture.Infrastructure
+namespace AspnetCoreBasicArchitecture.Infrastructure.AutoFac
 {
     public class ModuleConfiguration
     {

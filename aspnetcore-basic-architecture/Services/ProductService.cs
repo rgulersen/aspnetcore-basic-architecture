@@ -1,5 +1,7 @@
-﻿using AspnetCoreBasicArchitecture.Repositories;
+﻿using AspnetCoreBasicArchitecture.Model;
+using AspnetCoreBasicArchitecture.Repositories;
 using AspnetCoreBasicArchitecture.ViewModel;
+using AutoMapper;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,36 +10,29 @@ namespace AspnetCoreBasicArchitecture.Services
     public class ProductService : IProductService
     {
         private IProductRepository _productRepository;
+        private IMapper _mapper;
 
-        public ProductService(IProductRepository productRepository)
+        public ProductService(IProductRepository productRepository, IMapper mapper)
         {
             _productRepository = productRepository;
+            _mapper = mapper;
         }
 
         public ProductViewModel GetbyCode(int code)
         {
             var productEntity = _productRepository.GetbyCode(code);
-            return new ProductViewModel
-            {
-                Code = productEntity.Code,
-                Name = productEntity.Name,
-                Price = productEntity.Price
-            };
+           return  _mapper.Map<Product, ProductViewModel>(productEntity);
         }
 
         public IEnumerable<ProductViewModel> Products()
         {
-            return _productRepository.GetAll().Select(x => new ProductViewModel
-            {
-                Code = x.Code,
-                Name = x.Name,
-                Price = x.Price
-            });
+            var products = _productRepository.GetAll();
+            return  _mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(products);
         }
 
         public double SumOfPrice()
         {
-            return _productRepository.GetAll().Sum(x=>x.Price);
+            return _productRepository.GetAll().Sum(x => x.Price);
         }
     }
 }
