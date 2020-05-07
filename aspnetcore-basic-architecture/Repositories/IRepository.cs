@@ -1,6 +1,7 @@
 ﻿using System;
 using AspnetCoreBasicArchitecture.Model;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace AspnetCoreBasicArchitecture.Repositories
 {
@@ -12,4 +13,15 @@ namespace AspnetCoreBasicArchitecture.Repositories
         void Update(T entity);
         void Delete(Guid id);
     }
+
+    public interface IAsyncRepository<T> where T : BaseEntity, new()
+    {
+        Task AddAsync(T entity);
+        Task<IEnumerable<T>> GetAllAsync();
+        Task UpdateAsync(T entity);
+        Task DeleteAsync(Guid id);
+        Task<T> FindByIdAsync(Guid id);
+    }
+
+
 }
