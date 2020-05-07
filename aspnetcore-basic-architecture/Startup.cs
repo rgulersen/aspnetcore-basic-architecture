@@ -18,6 +18,7 @@ using Autofac;
 using AspnetCoreBasicArchitecture.Infrastructure.AutoFac;
 using System.Reflection;
 using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 
 namespace AspnetCoreBasicArchitecture
 {
@@ -35,15 +36,24 @@ namespace AspnetCoreBasicArchitecture
         {
             services.AddAutoMapper(typeof(Startup));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
             var connectionSetring = Configuration.GetConnectionString("ProductConnection");
             services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ProductConnection")));
+
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+                {
+                    options.Password.RequireDigit = true;
+                    options.Password.RequireUppercase = true;
+                    options.Password.RequiredLength = 8;
+                }).AddEntityFrameworkStores<DatabaseContext>().AddDefaultTokenProviders();
+
         }
 
         public void ConfigureContainer(ContainerBuilder builder)
         {
             var assemblyName = Assembly.GetExecutingAssembly().GetName().Name;
             var assembly = Assembly.Load(assemblyName);
-           
+
             builder.RegisterModule(new RepositoryModule(new ModuleConfiguration
             {
                 ModuleAssembly = assembly,
