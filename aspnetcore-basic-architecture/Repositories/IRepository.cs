@@ -12,15 +12,16 @@ namespace AspnetCoreBasicArchitecture.Repositories
         void Add(T entity);
         void Update(T entity);
         void Delete(Guid id);
+    }
 
-        #region async 
+    public interface IAsyncRepository<T> where T : BaseEntity, new()
+    {
         Task AddAsync(T entity);
         Task<IEnumerable<T>> GetAllAsync();
-        Task  UpdateAsync(T entity);
+        Task UpdateAsync(T entity);
         Task DeleteAsync(Guid id);
         Task<T> FindByIdAsync(Guid id);
-
-        #endregion
-
     }
+
+
 }

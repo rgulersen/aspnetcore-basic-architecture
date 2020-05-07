@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AspnetCoreBasicArchitecture.Repositories
 {
-    public class Repository<T> : IRepository<T> where T : BaseEntity, new()
+    public partial class Repository<T> : IRepository<T> where T : BaseEntity, new()
     {
         protected readonly DatabaseContext _db;
 
@@ -46,8 +46,12 @@ namespace AspnetCoreBasicArchitecture.Repositories
             _db.Update(entity);
             _db.SaveChanges();
         }
+    }
 
-        #region async
+
+    public partial class Repository<T> : IAsyncRepository<T> where T : BaseEntity, new()
+    {
+
         public async Task<T> FindByIdAsync(Guid id)
         {
             return await _entities.SingleOrDefaultAsync(x => x.Id == id);
@@ -68,7 +72,6 @@ namespace AspnetCoreBasicArchitecture.Repositories
         {
             _db.Update(entity);
             await _db.SaveChangesAsync();
-
         }
 
         public async Task DeleteAsync(Guid id)
@@ -77,7 +80,5 @@ namespace AspnetCoreBasicArchitecture.Repositories
             _db.Remove(entity);
             await _db.SaveChangesAsync();
         }
-        #endregion
-
     }
 }
