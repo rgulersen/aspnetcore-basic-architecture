@@ -1,6 +1,5 @@
 ﻿using Autofac;
 using System.Linq;
-using System.Reflection;
 using Module = Autofac.Module;
 
 namespace AspnetCoreBasicArchitecture.Infrastructure.AutoFac
