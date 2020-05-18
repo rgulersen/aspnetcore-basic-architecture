@@ -1,6 +1,5 @@
 ﻿using Autofac;
 using System.Linq;
-using Module = Autofac.Module;
 
 namespace AspnetCoreBasicArchitecture.Infrastructure.AutoFac
 {
@@ -14,7 +13,7 @@ namespace AspnetCoreBasicArchitecture.Infrastructure.AutoFac
 
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterAssemblyTypes(_moduleConfiguration.ModuleAssembly)
+            builder.RegisterAssemblyTypes(ThisAssembly)
                   .Where(t => t.Name.EndsWith(_moduleConfiguration.Suffix))
                   .AsImplementedInterfaces()
                   .InstancePerLifetimeScope();

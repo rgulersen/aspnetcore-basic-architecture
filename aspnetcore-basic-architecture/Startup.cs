@@ -22,6 +22,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using FluentValidation.AspNetCore;
+using AspnetCoreBasicArchitecture.Infrastructure.Filters;
 
 namespace AspnetCoreBasicArchitecture
 {
@@ -38,7 +40,13 @@ namespace AspnetCoreBasicArchitecture
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper(typeof(Startup));
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc(o => o.Filters.Add(new ValidationFilter()))
+                .AddFluentValidation(v =>
+                {
+                    v.RegisterValidatorsFromAssemblyContaining<ValidationModule>();
+                    v.RunDefaultMvcValidationAfterFluentValidationExecutes = false;
+                })
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             var connectionSetring = Configuration.GetConnectionString("ProductConnection");
             services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ProductConnection")));
@@ -73,19 +81,19 @@ namespace AspnetCoreBasicArchitecture
 
         public void ConfigureContainer(ContainerBuilder builder)
         {
-            var assemblyName = Assembly.GetExecutingAssembly().GetName().Name;
-            var assembly = Assembly.Load(assemblyName);
-
             builder.RegisterModule(new RepositoryModule(new ModuleConfiguration
             {
-                ModuleAssembly = assembly,
                 Suffix = Configuration["AutoFacModuleConfiguration:Repositories:Suffix"]
             }));
             builder.RegisterModule(new ServiceModule(new ModuleConfiguration
             {
-                ModuleAssembly = assembly,
                 Suffix = Configuration["AutoFacModuleConfiguration:Services:Suffix"]
             }));
+            builder.RegisterModule(new ValidationModule(new ModuleConfiguration
+            {
+                Suffix = Configuration["AutoFacModuleConfiguration:Validator:Suffix"]
+            }));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -104,5 +112,7 @@ namespace AspnetCoreBasicArchitecture
             app.UseMvc();
         }
 
+    
     }
+
 }

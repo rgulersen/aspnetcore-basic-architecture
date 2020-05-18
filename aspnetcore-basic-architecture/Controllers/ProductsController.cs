@@ -17,6 +17,7 @@ namespace AspnetCoreBasicArchitecture.Controllers
         {
             _productService = productService;
         }
+
         // GET api/products
         [HttpGet]
         public IEnumerable<ProductViewModel> Get() => _productService.Products();
@@ -25,6 +26,11 @@ namespace AspnetCoreBasicArchitecture.Controllers
         [HttpGet("{code}")]
         public ProductViewModel Get(int code) => _productService.GetbyCode(code);
 
-       
+        [HttpPost]
+        public IActionResult Post([FromBody] ProductViewModel productViewModel)
+        {
+            _productService.Create(productViewModel);
+            return Ok();
+        }
     }
 }
