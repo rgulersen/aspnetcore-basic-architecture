@@ -24,6 +24,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using FluentValidation.AspNetCore;
 using AspnetCoreBasicArchitecture.Infrastructure.Filters;
+using Microsoft.OpenApi.Models;
 
 namespace AspnetCoreBasicArchitecture
 {
@@ -76,6 +77,19 @@ namespace AspnetCoreBasicArchitecture
                 };
 
             });
+            services.AddSwaggerGen(s =>
+            {
+                s.SwaggerDoc("v1",
+                new OpenApiInfo
+                {
+                    Title = "Product API",
+                    License = new OpenApiLicense
+                    {
+                        Name = "MIT",
+                        Url = new Uri("https://opensource.org/licenses/MIT")
+                    }
+                });
+            });
 
         }
 
@@ -110,9 +124,14 @@ namespace AspnetCoreBasicArchitecture
             app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseMvc();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Product API V1");
+            });
         }
 
-    
+
     }
 
 }
