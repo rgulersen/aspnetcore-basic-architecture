@@ -1,11 +1,12 @@
 ﻿using AspnetCoreBasicArchitecture.Model;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 
 namespace AspnetCoreBasicArchitecture.Repositories
 {
-    public class DatabaseContext : DbContext
+    public class DatabaseContext : IdentityDbContext
     {
         public DatabaseContext(DbContextOptions options) : base(options)
         {
@@ -27,6 +28,7 @@ namespace AspnetCoreBasicArchitecture.Repositories
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Seed();
         }
 
