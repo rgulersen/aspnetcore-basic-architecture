@@ -34,5 +34,13 @@ namespace AspnetCoreBasicArchitecture.Services
         {
             return _productRepository.GetAll().Sum(x => x.Price);
         }
+
+        public void Create(ProductViewModel productViewModel)
+        {
+            _productRepository.Add(new Product
+            {
+                Code=productViewModel.Code,Name=productViewModel.Name,Price=productViewModel.Price
+            });
+        }
     }
 }

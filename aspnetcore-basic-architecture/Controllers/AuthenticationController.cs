@@ -20,14 +20,10 @@ namespace AspnetCoreBasicArchitecture.Controllers
         [HttpPost("Register")]
         public async Task<IActionResult> RegisterUserAsync([FromBody]UserRegisterViewModel userRegisterViewModel)
         {
-            if (ModelState.IsValid)
+            var result = await _userService.RegisterUserAsync(userRegisterViewModel);
+            if (result.IsSuccess)
             {
-                var result = await _userService.RegisterUserAsync(userRegisterViewModel);
-                if (result.IsSuccess)
-                {
-                    return Ok(result);
-                }
-
+                return Ok(result);
             }
             var message = string.Join(" | ", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage));
             return BadRequest(message);
@@ -35,15 +31,10 @@ namespace AspnetCoreBasicArchitecture.Controllers
         [HttpPost("Login")]
         public async Task<IActionResult> LoginUserAsync([FromBody]UserLoginViewModel userLoginViewModel)
         {
-            if (ModelState.IsValid)
+            var result = await _userService.LoginUserAsync(userLoginViewModel);
+            if (result.IsSuccess)
             {
-                var result = await _userService.LoginUserAsync(userLoginViewModel);
-                if (result.IsSuccess)
-                {
-                    return Ok(result);
-                }
-                return BadRequest(result);
-
+                return Ok(result);
             }
             var message = string.Join(" | ", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage));
             return BadRequest(message);

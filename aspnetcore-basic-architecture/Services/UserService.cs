@@ -24,26 +24,15 @@ namespace AspnetCoreBasicArchitecture.Services
         public async Task<UserManagerResponseViewModel> RegisterUserAsync(UserRegisterViewModel viewModel)
         {
             if (viewModel == null) throw new NullReferenceException("Register model is not null");
-            if (viewModel.Password != viewModel.ConfirmPassword)
-            {
-                return new UserManagerResponseViewModel
-                {
-                    Message = "The Confirm Password confirmation doesn't match",
-                    IsSuccess = false
-                };
-            }
-
             var user = new IdentityUser
             {
                 Email = viewModel.Email,
                 UserName = viewModel.UserName
             };
-
             var result = await _userManager.CreateAsync(user, viewModel.Password);
 
             if (result.Succeeded)
             {
-
                 return new UserManagerResponseViewModel
                 {
                     Message = "Your account has been created successfully",
