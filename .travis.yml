@@ -1,0 +1,13 @@
+language: csharp
+mono: none
+dotnet: 2.1.1
+script:
+ - dotnet restore
+
+name: .NET Core
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
