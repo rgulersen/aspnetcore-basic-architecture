@@ -5,16 +5,16 @@ namespace AspnetCoreBasicArchitecture.Infrastructure.AutoFac
 {
     public class ServiceModule : Module
     {
-        private ModuleConfiguration _moduleConfiguration;
-        public ServiceModule(ModuleConfiguration moduleConfiguration)
+        private string _suffix;
+        public ServiceModule(string suffix)
         {
-            _moduleConfiguration = moduleConfiguration;
+            _suffix = suffix;
         }
 
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterAssemblyTypes(ThisAssembly)
-                  .Where(t => t.Name.EndsWith(_moduleConfiguration.Suffix))
+                  .Where(t => t.Name.EndsWith(_suffix))
                   .AsImplementedInterfaces()
                   .InstancePerLifetimeScope();
         }

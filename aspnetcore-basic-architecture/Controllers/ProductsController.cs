@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace AspnetCoreBasicArchitecture.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase
