@@ -3,7 +3,6 @@
 # AspNetCore 2.1 Web API Layered Architecture
 ![.Net Core](https://travis-ci.com/rgulersen/aspnetcore-basic-architecture.svg?token=4sxkj6x5xLpp5vqQfYQk&branch=master)
 ___
-
 ## Database Initilaze (Code first approach)
 ```console
 add-migration <migration name>
@@ -11,7 +10,7 @@ update-database
 ```
 ## Technologies & Integration
 *   .NET Core 2.1
-*    ASP.NET Core 2.1
+*   ASP.NET Core 2.1
 *   Entity Framework Core 
 *   Autofac (IoC container for Microsoft .NET)
 *   AutoMapper
@@ -20,7 +19,7 @@ update-database
 *   Fluent Validation
 *   Swashbuckle Swagger
 ### File structure
-```
+``` mddir
     |-- Program.cs
     |-- Startup.cs
     |-- Controllers
