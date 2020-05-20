@@ -2,6 +2,7 @@
 
 # AspNetCore 2.1 Web API Layered Architecture
 ![.Net Core](https://travis-ci.com/rgulersen/aspnetcore-basic-architecture.svg?token=4sxkj6x5xLpp5vqQfYQk&branch=master)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/97b650e546334a2897a6ae5620f85b3f)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=rgulersen/aspnetcore-basic-architecture&amp;utm_campaign=Badge_Grade)
 ___
 ## Database Initilaze (Code first approach)
 ```console
