@@ -1,9 +1,16 @@
 <img align="left" width="116" height="116" src=".github/icon.png" />
 
 # AspNetCore 2.1 Web API Layered Architecture
-AspNetCore 2.1 Web API Layered Architecture
+![.Net Core](https://travis-ci.com/rgulersen/aspnetcore-basic-architecture.svg?token=4sxkj6x5xLpp5vqQfYQk&branch=master)
+___
 
 
+
+## Database Initilaze (Code first approach)
+```
+add-migration <migration name>
+update-database
+```
 
 ## Technologies & Integration
 
@@ -16,13 +23,6 @@ AspNetCore 2.1 Web API Layered Architecture
 - Jwt Bearer 
 - Fluent Validation
 - Swashbuckle Swagger
-
-## Database Initilaze (Code first approach)
-```
-add-migration <migration name>
-update-database
-```
-
 
 ## File structure
 
