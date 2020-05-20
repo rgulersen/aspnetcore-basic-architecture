@@ -4,28 +4,23 @@
 ![.Net Core](https://travis-ci.com/rgulersen/aspnetcore-basic-architecture.svg?token=4sxkj6x5xLpp5vqQfYQk&branch=master)
 ___
 
-
-
 ## Database Initilaze (Code first approach)
-```
+```console
 add-migration <migration name>
 update-database
 ```
-
 ## Technologies & Integration
-
-- .NET Core 2.1
-- ASP.NET Core 2.1
-- Entity Framework Core 
-- Autofac (IoC container for Microsoft .NET)
-- AutoMapper
-- ASP.NET Core Identity 
-- Jwt Bearer 
-- Fluent Validation
-- Swashbuckle Swagger
-
-## File structure
-
+*   .NET Core 2.1
+*    ASP.NET Core 2.1
+*   Entity Framework Core 
+*   Autofac (IoC container for Microsoft .NET)
+*   AutoMapper
+*   ASP.NET Core Identity 
+*   Jwt Bearer 
+*   Fluent Validation
+*   Swashbuckle Swagger
+### File structure
+```
     |-- Program.cs
     |-- Startup.cs
     |-- Controllers
@@ -81,10 +76,6 @@ update-database
     |   |-- UserLoginViewModel.cs
     |   |-- UserManagerResponseViewModel.cs
     |   |-- UserRegisterViewModel.cs
-
-
-
+``` 
 [.Net Core 3.1 version](https://github.com/rgulersen/aspnetcore-web-api-architecture).
-
-
 #### Thanks ([mddir](https://www.npmjs.com/package/mddir), [Jwt tutorial](https://bit.ly/2WZXBsN))
