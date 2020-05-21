@@ -20,8 +20,10 @@ namespace AspnetCoreBasicArchitecture.Repositories
 
             foreach (var entry in entries)
             {
-                if (entry.State == EntityState.Added) ((BaseEntity)entry.Entity).DiteTime = DateTime.Now;
-
+                if (entry.State == EntityState.Added)
+                {
+                    ((BaseEntity)entry.Entity).DiteTime = DateTime.Now;
+                }
             }
             return base.SaveChanges();
         }

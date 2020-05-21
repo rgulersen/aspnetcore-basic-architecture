@@ -5,7 +5,7 @@ namespace AspnetCoreBasicArchitecture.Infrastructure.AutoFac
 {
     public class ServiceModule : Module
     {
-        private string _suffix;
+        private readonly string _suffix;
         public ServiceModule(string suffix)
         {
             _suffix = suffix;
