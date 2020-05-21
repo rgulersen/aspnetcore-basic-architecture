@@ -1,5 +1,7 @@
-﻿using AspnetCoreBasicArchitecture.ViewModel;
+﻿using AspnetCoreBasicArchitecture.Infrastructure.Extensions;
+using AspnetCoreBasicArchitecture.ViewModel;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -14,16 +16,21 @@ namespace AspnetCoreBasicArchitecture.Services
     public class UserService : IUserService
     {
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly IConfiguration _configuration;
 
-        public UserService(UserManager<IdentityUser> userManager)
+        public UserService(UserManager<IdentityUser> userManager, IConfiguration configuration)
         {
             _userManager = userManager;
+            _configuration = configuration;
         }
 
 
         public async Task<UserManagerResponseViewModel> RegisterUserAsync(UserRegisterViewModel viewModel)
         {
-            if (viewModel == null) throw new NullReferenceException("Register model is not null");
+            if (viewModel == null)
+            {
+                throw new ArgumentNullException("Register model is not null");
+            }
             var user = new IdentityUser
             {
                 Email = viewModel.Email,
@@ -75,13 +82,12 @@ namespace AspnetCoreBasicArchitecture.Services
             {
                 new Claim("",viewModel.Email),new Claim(ClaimTypes.NameIdentifier,user.Id)
             };
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("this is my custom secret key for authnetication"));
             var token = new JwtSecurityToken(
-                issuer: "demo", 
-                audience: "demo",
+                issuer: _configuration.JwtTokenConfiguration().ValidIssuer,
+                audience: _configuration.JwtTokenConfiguration().ValidAudience,
                 claims: claims,
                 expires: DateTime.Now.AddDays(10),
-                signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256));
+                signingCredentials: new SigningCredentials(new SymmetricSecurityKey(_configuration.JwtTokenConfiguration().ConvertBytes()), SecurityAlgorithms.HmacSha256));
             string tokenString = new JwtSecurityTokenHandler().WriteToken(token);
 
             return new UserManagerResponseViewModel
