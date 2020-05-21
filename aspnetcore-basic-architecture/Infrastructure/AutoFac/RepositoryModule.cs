@@ -4,7 +4,7 @@ namespace AspnetCoreBasicArchitecture.Infrastructure.AutoFac
 {
     public class RepositoryModule : Module
     {
-        private string _suffix;
+        private readonly string _suffix;
         public RepositoryModule(string suffix)
         {
             _suffix = suffix;

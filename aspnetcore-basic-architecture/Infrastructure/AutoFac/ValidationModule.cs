@@ -5,7 +5,7 @@ namespace AspnetCoreBasicArchitecture.Infrastructure.AutoFac
 {
     public class ValidationModule:Module
     {
-        private string _suffix;
+        private readonly string _suffix;
         public ValidationModule(string suffix)
         {
             _suffix = suffix;

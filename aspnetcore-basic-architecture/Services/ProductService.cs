@@ -9,8 +9,8 @@ namespace AspnetCoreBasicArchitecture.Services
 {
     public class ProductService : IProductService
     {
-        private IProductRepository _productRepository;
-        private IMapper _mapper;
+        private readonly IProductRepository _productRepository;
+        private readonly IMapper _mapper;
 
         public ProductService(IProductRepository productRepository, IMapper mapper)
         {
